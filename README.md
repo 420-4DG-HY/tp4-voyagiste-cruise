@@ -3,9 +3,8 @@
 
 ## Équipe
 
-Sujet : [inscrivez quel service est développé par l'équipe]
-Noms :
-[Remplacez ce texte par vos noms ici]
+Sujet : Cruise
+Noms : Samuel Guérin, Frédéric Léger
 
 ## Description
 
