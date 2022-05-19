@@ -4,7 +4,7 @@
 ## Équipe
 
 Sujet : Cruise
-Noms : Samuel Guérin, Frédéric Léger
+Noms : Samuel Guérin, Frédéric Léger, David Bélisle
 
 ## Description
 
