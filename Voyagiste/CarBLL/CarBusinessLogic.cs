@@ -3,7 +3,6 @@ using CarDTO;
 using CarDAL;
 
 using Microsoft.Extensions.Logging;
-using CruiseDTO;
 
 namespace CarBLL
 {
@@ -33,7 +32,7 @@ namespace CarBLL
             _logger = Logger;
         }
 
-    public CarBooking Book(Guid CarId, DateTime From, DateTime To, Person rentedTo)
+        public CarBooking Book(Guid CarId, DateTime From, DateTime To, Person rentedTo)
         {
             Car? car = _dal.GetCar(CarId);
             if (car == null)
@@ -50,7 +49,7 @@ namespace CarBLL
             // Libère la plage horaire de cette réservation
             _dal.AddCarAvailability(cb.Car, cb.From, cb.To);
             CleanupAvailabilities(cb.Car);
-            
+
             return _dal.CancelBooking(cb);
         }
 
