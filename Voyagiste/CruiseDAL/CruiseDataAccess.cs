@@ -10,7 +10,7 @@ namespace CruiseDAL
     {
         public Cruise[] GetAvailableCruises();
         public Cruise? GetCruise(Guid CruiseId);
-        public Ship? GetShip(Guid ShipId);
+        public Cabin? GetCabin(Guid CabinId);
         public CruiseAvailability[] GetCruiseAvailabilities(Cruise cruise);
         public CruiseAvailability[] GetCruiseAvailabilities(Cabin cabin);
         public CruiseAvailability AddCruiseAvailability(Cabin cabin, DateTime From, DateTime To, Person rentedTo);
@@ -65,6 +65,10 @@ namespace CruiseDAL
             throw new NotImplementedException();
         }
 
+        public Cabin? GetCabin(Guid CabinId) {
+            throw new NotImplementedException();
+        }
+
         public Cruise? GetCruise(Guid CruiseId) {
             throw new NotImplementedException();
         }
@@ -86,10 +90,6 @@ namespace CruiseDAL
         }
 
         public CruiseBooking[] GetCruiseBookings(Cabin cabin) {
-            throw new NotImplementedException();
-        }
-
-        public Ship? GetShip(Guid ShipId) {
             throw new NotImplementedException();
         }
     }
