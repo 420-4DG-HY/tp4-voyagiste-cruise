@@ -8,7 +8,7 @@ namespace CruiseBLL
 {
     public interface ICruiseBusinessLogic
     {
-        public Cruise[] GetAvailableCruises();
+        public Cruise[] GetAvailableCruises(Cruise cruise);
         public CruiseAvailability[] GetCruiseAvailabilities(Cruise cruise);
         public CruiseBooking? GetCruiseBooking(Guid CruiseBookingId);
         public Cruise? GetCruise(Guid CruiseId);
@@ -34,43 +34,52 @@ namespace CruiseBLL
         }
 
         public CruiseBooking Book(Guid CabinId, DateTime from, DateTime To, Person rentedTo) {
-            throw new NotImplementedException();
+            Cruise? cruise = _dal.GetCruise(CabinId);
+            if (cruise == null)
+            {
+                string message = "Invalid Cruise GUID: "+CabinId;
+                _logger.LogError(message);
+                throw new Exception(message);
+            }
+            return Book(CabinId,from,To, rentedTo);
         }
 
-        public BookingCancellation CancelBooking(CruiseBooking booking) {
-            throw new NotImplementedException();
+        public BookingCancellation CancelBooking(CruiseBooking bk) {
+            _dal.AddCruiseAvailability(bk.Cabin,bk.BookedWhen,bk.BookedWhen,bk.Person);
+            GetCruiseAvailabilities(bk.Cruise);
+            return CancelBooking(bk);
         }
 
         public BookingConfirmation ConfirmBooking(CruiseBooking booking) {
-            throw new NotImplementedException();
+            return _dal.ConfirmBooking(booking);
         }
 
-        public Cruise[] GetAvailableCruises() {
-            throw new NotImplementedException();
+        public Cruise[] GetAvailableCruises(Cruise cruise) {
+            return _dal.GetAvailableCruises(cruise);
         }
 
         public BookingCancellation? GetBookingCancellation(CruiseBooking booking) {
-            throw new NotImplementedException();
+            return _dal.GetBookingCancellation(booking);
         }
 
         public BookingConfirmation? GetBookingConfirmation(CruiseBooking booking) {
-            throw new NotImplementedException();
+            return _dal.GetBookingConfirmation(booking);
         }
 
         public Cabin? GetCabin(Guid CabinId) {
-            throw new NotImplementedException();
+            return _dal.GetCabin(CabinId);
         }
 
         public Cruise? GetCruise(Guid CruiseId) {
-            throw new NotImplementedException();
+            return _dal.GetCruise(CruiseId);
         }
 
         public CruiseAvailability[] GetCruiseAvailabilities(Cruise cruise) {
-            throw new NotImplementedException();
+            return GetCruiseAvailabilities(cruise);
         }
 
         public CruiseBooking? GetCruiseBooking(Guid CruiseBookingId) {
-            throw new NotImplementedException();
+            return GetCruiseBooking(CruiseBookingId);
         }
     }
 }
