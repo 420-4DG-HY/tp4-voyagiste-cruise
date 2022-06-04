@@ -8,7 +8,7 @@ namespace CruiseDAL
 {
     public interface ICruiseDataAccess
     {
-        public Cruise[] GetAvailableCruises();
+        public Cruise[] GetAvailableCruises(Cruise cruise);
         public Cruise? GetCruise(Guid CruiseId);
         public Cabin? GetCabin(Guid CabinId);
         public CruiseAvailability[] GetCruiseAvailabilities(Cruise cruise);
