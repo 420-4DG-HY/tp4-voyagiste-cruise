@@ -70,9 +70,8 @@ namespace CruiseDAL
         }
 
         public Cruise[] GetAvailableCruises() {
-            //return FakeData.cruises.Select(c => c.ship).Distinct().ToArray();
-            throw new NotImplementedException();
-        }
+			return FakeData.GetInstance().cruiseAvailabilities.Select(x => x.Cruise).Distinct().ToArray();
+		}
 
         public BookingCancellation? GetBookingCancellation(CruiseBooking booking) {
             return FakeData.GetInstance().bookingCancellations.Where(bc => bc.Booking == booking).FirstOrDefault();
@@ -91,23 +90,23 @@ namespace CruiseDAL
         }
 
         public CruiseAvailability[] GetCruiseAvailabilities(Cruise cruise) {
-            throw new NotImplementedException();
-        }
+			return FakeData.GetInstance().cruiseAvailabilities.Where(ca => ca.Cruise == cruise).ToArray();
+		}
 
         public CruiseAvailability[] GetCruiseAvailabilities(Cabin cabin) {
-            throw new NotImplementedException();
-        }
+			return FakeData.GetInstance().cruiseAvailabilities.Where(ca => ca.Cabin == cabin).ToArray();
+		}
 
         public CruiseBooking? GetCruiseBooking(Guid CruiseBookingId) {
             return FakeData.GetInstance().cruiseBookings.Where(cb => cb.CruiseBookingGuid == CruiseBookingId).FirstOrDefault();
         }
 
         public CruiseBooking[] GetCruiseBookings(Person rentedTo) {
-            throw new NotImplementedException();
-        }
+			return FakeData.GetInstance().cruiseBookings.Where(cb => cb.Person == rentedTo).ToArray();
+		}
 
         public CruiseBooking[] GetCruiseBookings(Cabin cabin) {
-            throw new NotImplementedException();
-        }
+			return FakeData.GetInstance().cruiseBookings.Where(cb => cb.Cabin == cabin).ToArray();
+		}
     }
 }
