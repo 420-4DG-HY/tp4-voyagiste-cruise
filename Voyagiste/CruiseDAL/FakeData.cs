@@ -129,9 +129,9 @@ namespace CruiseDAL
         private FakeData()
         {
             cruiseAvailabilities = new List<CruiseAvailability>();
-            cruiseAvailabilities.Add(new CruiseAvailability(new Guid("xxx"), cruises[0], cabins[0]));
-            cruiseAvailabilities.Add(new CruiseAvailability(new Guid("yyy"), cruises[1], cabins[2]));
-            cruiseAvailabilities.Add(new CruiseAvailability(new Guid("jjj"), cruises[2], cabins[1]));
+            cruiseAvailabilities.Add(new CruiseAvailability(new Guid("0b010e68-b263-4159-b5f4-4fdb11cae39c"), cruises[0], cabins[0]));
+            cruiseAvailabilities.Add(new CruiseAvailability(new Guid("ba182f6b-4a8b-42b3-95f4-9a20b579deae"), cruises[1], cabins[2]));
+            cruiseAvailabilities.Add(new CruiseAvailability(new Guid("e178fa90-0115-448d-abe2-ae6482972c70"), cruises[2], cabins[1]));
 
             cruiseBookings = new List<CruiseBooking>();
             bookingConfirmations = new List<BookingConfirmation>();

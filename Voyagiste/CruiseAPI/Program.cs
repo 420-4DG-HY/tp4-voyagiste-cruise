@@ -1,6 +1,5 @@
-//global using CruiseBLL;
-//global using CruiseDAL;
-
+global using CruiseBLL;
+global using CruiseDAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Instances de nos BLL et DAL
-//builder.Services.AddSingleton<ICruiseDataAccess, CruiseDataAccess>();
-//builder.Services.AddSingleton<ICruiseBusinessLogic, CruiseBusinessLogic>();
+builder.Services.AddSingleton<ICruiseDataAccess, CruiseDataAccess>();
+builder.Services.AddSingleton<ICruiseBusinessLogic, CruiseBusinessLogic>();
 
 var app = builder.Build();
 
