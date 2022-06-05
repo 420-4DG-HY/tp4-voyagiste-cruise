@@ -8,7 +8,7 @@ namespace CruiseDAL
 {
     public interface ICruiseDataAccess
     {
-        public Cruise[] GetAvailableCruises(Cruise cruise);
+        public Cruise[] GetAvailableCruises();
         public Cruise? GetCruise(Guid CruiseId);
         public Cabin? GetCabin(Guid CabinId);
         public CruiseAvailability[] GetCruiseAvailabilities(Cruise cruise);
@@ -17,7 +17,7 @@ namespace CruiseDAL
         public CruiseBooking? GetCruiseBooking(Guid CruiseBookingId);
         public CruiseBooking[] GetCruiseBookings(Person rentedTo);
         public CruiseBooking[] GetCruiseBookings(Cabin cabin);
-        public CruiseBooking Book(Cabin cabin, DateTime from, DateTime To, Person rentedTo);
+        public CruiseBooking Book(Cruise cruise,Cabin cabin, DateTime from, DateTime To, Person rentedTo);
 
         public BookingConfirmation ConfirmBooking(CruiseBooking booking);
         public BookingConfirmation? GetBookingConfirmation(CruiseBooking booking);
@@ -41,36 +41,53 @@ namespace CruiseDAL
             throw new NotImplementedException();
         }
 
-        public CruiseBooking Book(Cabin cabin, DateTime from, DateTime To, Person rentedTo) {
-            throw new NotImplementedException();
+        public CruiseBooking Book(Cruise cruise,Cabin cabin, DateTime from, DateTime To, Person rentedTo) {
+            var booking = new CruiseBooking(new Guid(), rentedTo, cruise, cabin, from);
+            FakeData.GetInstance().cruiseBookings.Add(booking);
+            return booking;
         }
 
         public BookingCancellation CancelBooking(CruiseBooking booking) {
-            throw new NotImplementedException();
+            BookingCancellation bc = new BookingCancellation(new Guid(), booking, new DateTime());
+            FakeData.GetInstance().bookingCancellations.Add(bc);
+            return bc;
         }
 
         public BookingConfirmation ConfirmBooking(CruiseBooking booking) {
-            throw new NotImplementedException();
+            BookingCancellation? bBancel = GetBookingCancellation(booking);
+            if (bBancel != null)
+            {
+                string message = "Cannot confirm booking : \n" + booking + " \nBecause it has been cancelled by : \n" + bBancel;
+                _logger.LogError(message);
+                throw new Exception(message);
+            }
+            else
+            {
+                BookingConfirmation confirmation = new BookingConfirmation(new Guid(), booking, new DateTime());
+                FakeData.GetInstance().bookingConfirmations.Add(confirmation);
+                return confirmation;
+            }
         }
 
         public Cruise[] GetAvailableCruises() {
+            //return FakeData.cruises.Select(c => c.ship).Distinct().ToArray();
             throw new NotImplementedException();
         }
 
         public BookingCancellation? GetBookingCancellation(CruiseBooking booking) {
-            throw new NotImplementedException();
+            return FakeData.GetInstance().bookingCancellations.Where(bc => bc.Booking == booking).FirstOrDefault();
         }
 
         public BookingConfirmation? GetBookingConfirmation(CruiseBooking booking) {
-            throw new NotImplementedException();
+            return FakeData.GetInstance().bookingConfirmations.Where(bc => bc.Booking == booking).FirstOrDefault();
         }
 
         public Cabin? GetCabin(Guid CabinId) {
-            throw new NotImplementedException();
+            return FakeData.cabins.Where(c => c.CabinGuid == CabinId).FirstOrDefault();
         }
 
         public Cruise? GetCruise(Guid CruiseId) {
-            throw new NotImplementedException();
+            return FakeData.cruises.Where(c => c.CruiseGuid == CruiseId).FirstOrDefault();
         }
 
         public CruiseAvailability[] GetCruiseAvailabilities(Cruise cruise) {
@@ -82,7 +99,7 @@ namespace CruiseDAL
         }
 
         public CruiseBooking? GetCruiseBooking(Guid CruiseBookingId) {
-            throw new NotImplementedException();
+            return FakeData.GetInstance().cruiseBookings.Where(cb => cb.CruiseBookingGuid == CruiseBookingId).FirstOrDefault();
         }
 
         public CruiseBooking[] GetCruiseBookings(Person rentedTo) {

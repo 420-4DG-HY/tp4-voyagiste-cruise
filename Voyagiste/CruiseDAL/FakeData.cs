@@ -120,7 +120,23 @@ namespace CruiseDAL
         // TODO Simuler de la disponibilité. Attention, les disponibilités (Availability)
         // ne doivent pas être statiques puis qu'on doit voir 
         // la disponibilité changer après une réservation
+        internal List<CruiseAvailability> cruiseAvailabilities;
+        internal List<CruiseBooking> cruiseBookings;
+        internal List<BookingConfirmation> bookingConfirmations;
+        internal List<BookingCancellation> bookingCancellations;
 
+
+        private FakeData()
+        {
+            cruiseAvailabilities = new List<CruiseAvailability>();
+            cruiseAvailabilities.Add(new CruiseAvailability(new Guid("xxx"), cruises[0], cabins[0]));
+            cruiseAvailabilities.Add(new CruiseAvailability(new Guid("yyy"), cruises[1], cabins[2]));
+            cruiseAvailabilities.Add(new CruiseAvailability(new Guid("jjj"), cruises[2], cabins[1]));
+
+            cruiseBookings = new List<CruiseBooking>();
+            bookingConfirmations = new List<BookingConfirmation>();
+            bookingCancellations = new List<BookingCancellation>();
+        }
 
         internal static FakeData GetInstance()
         {

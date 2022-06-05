@@ -8,7 +8,7 @@ namespace CruiseBLL
 {
     public interface ICruiseBusinessLogic
     {
-        public Cruise[] GetAvailableCruises(Cruise cruise);
+        public Cruise[] GetAvailableCruises();
         public CruiseAvailability[] GetCruiseAvailabilities(Cruise cruise);
         public CruiseBooking? GetCruiseBooking(Guid CruiseBookingId);
         public Cruise? GetCruise(Guid CruiseId);
@@ -54,8 +54,8 @@ namespace CruiseBLL
             return _dal.ConfirmBooking(booking);
         }
 
-        public Cruise[] GetAvailableCruises(Cruise cruise) {
-            return _dal.GetAvailableCruises(cruise);
+        public Cruise[] GetAvailableCruises() {
+            return _dal.GetAvailableCruises();
         }
 
         public BookingCancellation? GetBookingCancellation(CruiseBooking booking) {
