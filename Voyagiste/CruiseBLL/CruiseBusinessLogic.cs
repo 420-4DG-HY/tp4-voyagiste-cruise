@@ -75,11 +75,11 @@ namespace CruiseBLL
         }
 
         public CruiseAvailability[] GetCruiseAvailabilities(Cruise cruise) {
-            return GetCruiseAvailabilities(cruise);
+            return _dal.GetCruiseAvailabilities(cruise);
         }
 
         public CruiseBooking? GetCruiseBooking(Guid CruiseBookingId) {
-            return GetCruiseBooking(CruiseBookingId);
+            return _dal.GetCruiseBooking(CruiseBookingId);
         }
     }
 }
